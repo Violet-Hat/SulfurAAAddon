@@ -1,0 +1,6 @@
+Consumables: {
+	UniSporeBag: {
+		DisplayName: Unified Spore Bag
+		Tooltip: Spreads Unified Mushrooms
+	}
+}

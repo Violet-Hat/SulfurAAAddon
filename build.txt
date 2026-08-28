@@ -1,0 +1,5 @@
+displayName = Sulfuric AAcid Mod
+author = Sulfur
+version = 0.1
+
+buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*

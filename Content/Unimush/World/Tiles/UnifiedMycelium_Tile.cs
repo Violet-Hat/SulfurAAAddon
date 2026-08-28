@@ -1,0 +1,66 @@
+using AAModClassic._Content.RedMushroom.___PreHardmode.Items.Quest;
+using AAModClassic._Content.RedMushroom.World.Tiles;
+using AAModClassic.UI.World;
+using Microsoft.Xna.Framework;
+using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
+
+namespace SulfurAAAddon.Content.Unimush.World.Tiles
+{
+    public class UnifiedMycelium_Tile : ModTile
+	{
+		public override void SetStaticDefaults()
+		{
+			Main.tileSolid[Type] = true;
+            TileID.Sets.Conversion.Grass[Type] = true;
+            Main.tileBlendAll[Type] = true;
+            Main.tileBlockLight[Type] = true;
+            TileID.Sets.NeedsGrassFraming[Type] = true;
+            DustType = DustID.PurpleCrystalShard;
+			AddMapEntry(new Color(100, 0, 100));
+            RegisterItemDrop(ItemID.DirtBlock);
+		}
+
+        public override void RandomUpdate(int i, int j)
+        {
+            if (!Framing.GetTileSafely(i, j - 1).HasTile && Main.rand.NextBool(30))
+            {
+                int style = Main.rand.Next(5);
+                if (!WorldTypeSystem.IsWorldOptionEnabled(AAWorldOption.Unreleased))
+                    style = 0;
+
+                if (PlaceObject(i, j - 1, ModContent.TileType<Mushroom_Tile>(), false, style))
+                    NetMessage.SendObjectPlacement(-1, i, j - 1, ModContent.TileType<Mushroom_Tile>(), style, 0, -1, -1);
+            }
+
+            if (!Framing.GetTileSafely(i, j - 1).HasTile && Main.rand.NextBool(30))
+            {
+                int style = Main.rand.Next(5);
+                if (PlaceObject(i, j - 1, TileID.MushroomPlants, false, style))
+                    NetMessage.SendObjectPlacement(-1, i, j - 1, TileID.MushroomPlants, style, 0, -1, -1);
+            }
+
+            if (!Framing.GetTileSafely(i, j - 1).HasTile && Main.rand.NextBool(1000))
+            {
+                int style = Main.rand.Next(5);
+                if (PlaceObject(i, j - 1, ModContent.TileType<MadnessMushroom_Tile>(), false, style))
+                    NetMessage.SendObjectPlacement(-1, i, j - 1, ModContent.TileType<MadnessMushroom_Tile>(), style, 0, -1, -1);
+            }
+        }
+
+        public static bool PlaceObject(int x, int y, int type, bool mute = false, int style = 0, int random = -1, int direction = -1)
+        {
+            if (!TileObject.CanPlace(x, y, type, style, direction, out TileObject toBePlaced, false))
+            {
+                return false;
+            }
+            toBePlaced.random = random;
+            if (TileObject.Place(toBePlaced) && !mute)
+            {
+                WorldGen.SquareTileFrame(x, y, true);
+            }
+            return false;
+        }
+    }
+}
