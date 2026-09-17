@@ -7,17 +7,18 @@ using Terraria.ModLoader;
 using Terraria.Localization;
 using Terraria.WorldBuilding;
 using Terraria.GameContent.Generation;
-using AAModClassic;
-using AAModClassic._CrossMod;
-using AAModClassic.Utilities;
-using AAModClassic.UI.World;
-using AAModClassic.Base.BaseMod.Base;
 using SulfurAAAddon.Content.Unimush.World.Tiles;
 using SulfurAAAddon.Content.Inferno.World.Biomes;
 using SulfurAAAddon.Content.Mire.World.Biomes;
 using SulfurAAAddon.Content.Hoard.World.Biomes;
 using SulfurAAAddon.Content.Parthenan.World.Biomes;
 using SulfurAAAddon.Content.Terrarium.World.Biomes;
+using AAModClassic;
+using AAModClassic.Utilities;
+using AAModClassic._CrossMod;
+using AAModClassic.UI.World;
+using AAModClassic.Base.BaseMod.Base;
+using AAModClassic._CrossMod.SpiritReforged;
 
 namespace SulfurAAAddon
 {
@@ -235,16 +236,14 @@ namespace SulfurAAAddon
         //World generation task modifications
         public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
-            /*
-            int TerrariumIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Terrarium"));
-            if(TerrariumIndex > -1)
+            int ReverseTerrariumIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Reserve Terrarium"));
+            if(ReverseTerrariumIndex > -1)
             {
-                tasks[TerrariumIndex] = new PassLegacy("Terrarium", (progress, config) =>
+                tasks[ReverseTerrariumIndex] = new PassLegacy("Reserve Terrarium", (progress, config) =>
                 {
                     ReserveTerrarium(progress);
                 });
             }
-            */
 
             int ChaosIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Mire and Inferno"));
             if(ChaosIndex > -1)
@@ -264,16 +263,14 @@ namespace SulfurAAAddon
                 });
             }
             
-            /*
-            int TerrariumIndex2 = tasks.FindIndex(genpass => genpass.Name.Equals("Equinox"));
-            if(TerrariumIndex2 > -1)
+            int TerrariumIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Terrarium"));
+            if(TerrariumIndex > -1)
             {
-                tasks.Insert(TerrariumIndex2 + 1, new PassLegacy("Terrarium 2", delegate (GenerationProgress progress, GameConfiguration config)
+                tasks[TerrariumIndex] = new PassLegacy("Terrarium", (progress, config) =>
                 {
                     Terrarium(progress);
-                }));
+                });
             }
-            */
 
             //Unreleased
             if (WorldTypeSystem.IsWorldOptionEnabled(AAWorldOption.Unreleased))

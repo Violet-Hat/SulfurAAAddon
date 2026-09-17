@@ -1,6 +1,13 @@
+using System;
+using AAModClassic._CrossMod;
 using AAModClassic.Music;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
+using Terraria.Graphics.Effects;
 using Terraria.ModLoader;
+using Terraria.Utilities;
 
 namespace SulfurAAAddon.Content.Unimush.World.Biomes
 {
@@ -12,11 +19,9 @@ namespace SulfurAAAddon.Content.Unimush.World.Biomes
 
         public override string BackgroundPath => "SulfurAAAddon/Content/Unimush/World/Biomes/Backgrounds/UnimushroomMap";
 
-        public override bool IsBiomeActive(Player player)
-        {
-            bool active = AddonAAWorld.unimushTiles > 100;
-            return active;
-        }
+        public override bool IsBiomeActive(Player player) => AddonAAWorld.unimushTiles > 100;
+
+        //public override void SpecialVisuals(Player player, bool isActive) => player.ManageSpecialBiomeVisuals("SulfurAAAddon:UnimushSky", isActive);
 
         public override int Music => MusicManagementSystem.MusicSlots["Unimushroom_Surface"];
 

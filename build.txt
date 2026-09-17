@@ -2,4 +2,8 @@ displayName = Sulfuric AAcid Mod
 author = Sulfur
 version = 0.1
 
+modReferences = AAModClassic
+loadAfter = AAMod, AAModClassic, CalamityMod
+sortAfter = CalamityFables, SpiritReforged
+
 buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*

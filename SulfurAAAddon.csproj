@@ -11,7 +11,7 @@
 	<!-- References -->
 	<ItemGroup>
 		<Reference Include="AAModClassic">
-	    	<HintPath>..\ModAssemblies\AAModClassic_v1.0.21.dll</HintPath>
+	    	<HintPath>..\ModAssemblies\AAModClassic_v1.0.25.dll</HintPath>
 	  	</Reference>
 	</ItemGroup>
 
